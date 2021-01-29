@@ -1,0 +1,50 @@
+---
+title: "ploty_presentation"
+author: "Jason Naramore"
+date: "1/28/2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r figure_code, echo=FALSE,message=FALSE}
+library(quantmod);library(plotly)
+getSymbols('GOOG') 
+mGoog<-to.monthly(GOOG)
+googOpen<-Op(mGoog)
+ts1<-ts(googOpen,frequency = 12)
+
+x <- list(title = "Year")
+y <- list(title = "Price (USD)")
+fig<-plot_ly(y = ts1, x = time(googOpen),mode = "lines")
+fig <- fig %>% layout(xaxis = x, yaxis = y)
+```
+
+## Google Stock Price
+
+Plot of opening price of Google stock
+
+```{r plot, echo=FALSE,message=FALSE,fig.keep = 'all'}
+fig
+```
+
+## Google Stock Price (Code)
+
+Code used to download and create plot Google stock price
+
+```{r code, echo=TRUE,message=FALSE}
+library(quantmod);library(plotly)
+getSymbols('GOOG') 
+mGoog<-to.monthly(GOOG)
+googOpen<-Op(mGoog)
+ts1<-ts(googOpen,frequency = 12)
+
+x <- list(title = "Year")
+y <- list(title = "Price (USD)")
+fig<-plot_ly(y = ts1, x = time(googOpen),mode = "lines")
+fig <- fig %>% layout(xaxis = x, yaxis = y)
+```
+## The End
